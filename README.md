@@ -1,22 +1,22 @@
-#Hack the school
+# Hack the school
 Scripts to help
 
-##Using
+## Using
 Use your Django shell. Don't forget about imports, they are important.
 
-##fix_marks
+## fix_marks
 Fix bad marks to A grade of one schoolkid.
 
 Input: schoolkid - Schoolkid object.
 
 Return: None
-##remove_chastisements
+## remove_chastisements
 Remove bad words about ont schoolkid
 
 Input: schoolkid - Schoolkid object.
 
 Return: None
-##create_commendation
+## create_commendation
 Get child name, find it in DB. 
 
 If there is not person with this name show message about it and stop the script. 
