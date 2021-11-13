@@ -7,13 +7,15 @@ Use your Django shell. Don't forget about imports, they are important.
 ## fix_marks
 Fix bad marks to A grade of one schoolkid.
 
-Input: schoolkid - Schoolkid object.
+Input: 
+* schoolkid - Schoolkid object.
 
 Return: None
 ## remove_chastisements
 Remove bad words about ont schoolkid
 
-Input: schoolkid - Schoolkid object.
+Input: 
+* schoolkid - Schoolkid object.
 
 Return: None
 ## create_commendation
