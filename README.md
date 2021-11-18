@@ -2,7 +2,12 @@
 Scripts help Ivan hack his class school journal. Scripts only work from Django shell.
 
 ## Using
-Use your Django shell. Don't forget about imports, they are important.
+1. Open your Django shell by
+    ```
+    python manage.py shell
+    ```
+2. Copy full scripts' texts and paste them in the Django shell.
+3. Use all 3 available functions.
 
 ## fix_marks
 Fix bad marks to A grade of one schoolkid.
