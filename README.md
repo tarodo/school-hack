@@ -1,5 +1,5 @@
 # Hack the school
-Scripts to help
+Scripts help Ivan hack his class school journal. Scripts only work from Django shell.
 
 ## Using
 Use your Django shell. Don't forget about imports, they are important.
