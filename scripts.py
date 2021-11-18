@@ -1,6 +1,6 @@
 import random
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
-from datacenter.models import Schoolkid, Mark, Chastisement, Lesson, Commendation
+from datacenter.models import Schoolkid, Mark, Chastisement, Lesson, Commendation, Subject
 
 
 def fix_marks(schoolkid: Schoolkid):
@@ -20,14 +20,23 @@ def create_commendation(child_name, subject_name):
     child = None
     try:
         child = Schoolkid.objects.filter(full_name__contains=child_name).get()
-    except MultipleObjectsReturned:
+    except Schoolkid.MultipleObjectsReturned:
         print('There are many children with this name')
         return None
-    except ObjectDoesNotExist:
+    except Schoolkid.DoesNotExist:
         print('There is no child with this name')
         return None
-    child_lessons = Lesson.objects.filter(year_of_study=child.year_of_study, group_letter=child.group_letter,
-                                          subject__title=subject_name, subject__year_of_study=child.year_of_study).all()
+    try:
+        lesson_subject = Subject.objects.filter(year_of_study=child.year_of_study, title=subject_name).get()
+    except Subject.DoesNotExist:
+        print('There is no subject with this name')
+        return None
+    try:
+        child_lessons = Lesson.objects.filter(year_of_study=child.year_of_study, group_letter=child.group_letter,
+                                              subject=lesson_subject).all()
+    except Lesson.DoesNotExist:
+        print('There is no lesson for commendation')
+        return None
     commendations = ['Молодец!', 'Отлично!', 'Хорошо!', 'Гораздо лучше, чем я ожидал!', 'Ты меня приятно удивил!',
                      'Великолепно!', 'Прекрасно!', 'Ты меня очень обрадовал!', 'Именно этого я давно ждал от тебя!',
                      'Сказано здорово – просто и ясно!', 'Ты, как всегда, точен!', 'Очень хороший ответ!',
