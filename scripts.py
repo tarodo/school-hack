@@ -1,7 +1,6 @@
 import random
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datacenter.models import Schoolkid, Mark, Chastisement, Lesson, Commendation
-child = Schoolkid.objects.filter(full_name__contains='Фролов Иван')
 
 
 def fix_marks(schoolkid: Schoolkid):
