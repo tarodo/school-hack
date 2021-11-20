@@ -14,12 +14,14 @@ def fix_marks(schoolkid: Schoolkid):
     for one_mark in child_marks:
         one_mark.points = 5
         one_mark.save()
+    print("Success! You are an excellent student!")
 
 
 def remove_chastisements(schoolkid: Schoolkid):
     all_chastisements = Chastisement.objects.filter(schoolkid=schoolkid)
     for one_chastisement in all_chastisements:
         one_chastisement.delete()
+    print("Success! You are a student w/o problems!")
 
 
 def create_commendation(child_name, subject_name):
@@ -40,11 +42,15 @@ def create_commendation(child_name, subject_name):
         print("There is no subject with this name")
         return None
     try:
-        one_lesson = Lesson.objects.filter(
-            year_of_study=child.year_of_study,
-            group_letter=child.group_letter,
-            subject=lesson_subject,
-        ).order_by('?').first()
+        one_lesson = (
+            Lesson.objects.filter(
+                year_of_study=child.year_of_study,
+                group_letter=child.group_letter,
+                subject=lesson_subject,
+            )
+            .order_by("?")
+            .first()
+        )
     except Lesson.DoesNotExist:
         print("There is no lesson for commendation")
         return None
@@ -89,3 +95,8 @@ def create_commendation(child_name, subject_name):
         teacher=one_lesson.teacher,
     )
     commendation.save()
+    print(
+        f"'{commendation.schoolkid}' received commendation "
+        f"'{commendation.text}' for the "
+        f"{commendation.subject} on {commendation.created}"
+    )
