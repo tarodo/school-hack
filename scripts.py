@@ -40,11 +40,11 @@ def create_commendation(child_name, subject_name):
         print("There is no subject with this name")
         return None
     try:
-        child_lessons = Lesson.objects.filter(
+        one_lesson = Lesson.objects.filter(
             year_of_study=child.year_of_study,
             group_letter=child.group_letter,
             subject=lesson_subject,
-        ).all()
+        ).order_by('?').first()
     except Lesson.DoesNotExist:
         print("There is no lesson for commendation")
         return None
@@ -80,7 +80,6 @@ def create_commendation(child_name, subject_name):
         "Ты многое сделал, я это вижу!",
         "Теперь у тебя точно все получится!",
     ]
-    one_lesson = random.choice(child_lessons)
     commendation_text = random.choice(commendations)
     commendation = Commendation.objects.create(
         text=commendation_text,
